@@ -19,11 +19,49 @@ def reccomend(movie):
 
 
 
+import streamlit as st
+
 st.title('Similar Movie Predictor')
 
-selected_movie_name = st.selectbox('for which movie you want to find similar movies?',movie_list['title'].values)
+# Display the logo properly
+st.sidebar.image("./static/logo_vj.png", width=200)  # Increase width if needed
 
-if st.button('Reccomend'):
-    reccomended_movies = reccomend(selected_movie_name)
-    for i in reccomended_movies:
+# Footer with name & links
+st.markdown(
+    """
+    <style>
+    .footer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background-color: #222; /* Dark background */
+        color: #fff; /* White text */
+        text-align: center;
+        padding: 10px;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .footer a {
+        color: #1E90FF; /* Bright blue links */
+        text-decoration: none;
+        font-weight: bold;
+        margin: 0 10px;
+    }
+    </style>
+    <div class="footer">
+        <p>Created by <b>Vinod Jha</b> |  
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a> |  
+        <a href="https://vinodjha.github.io/" target="_blank">Website</a></p>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+# Dropdown & button
+selected_movie_name = st.selectbox('For which movie do you want to find similar movies?', movie_list['title'].values)
+
+if st.button('Recommend'):
+    recommended_movies = recommend(selected_movie_name)
+    for i in recommended_movies:
         st.write(i)
